@@ -5,6 +5,7 @@
  */
 package com.lhn.hibernatedemo;
 
+import com.lhn.pojo.Category;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -28,6 +29,10 @@ public class HibernateUtils {
         pros.put(Environment.USER, "root");
         pros.put(Environment.PASS, "12345678");
         pros.put(Environment.SHOW_SQL, "true");
+        
+        conf.setProperties(pros);
+        
+        conf.addAnnotatedClass(Category.class);
         
         ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
         factory = conf.buildSessionFactory(registry);
