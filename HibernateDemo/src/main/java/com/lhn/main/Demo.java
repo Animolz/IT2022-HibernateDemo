@@ -7,6 +7,8 @@ package com.lhn.main;
 
 import com.lhn.hibernatedemo.HibernateUtils;
 import com.lhn.pojo.Category;
+import com.lhn.pojo.Product;
+import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,11 +20,10 @@ import org.hibernate.query.Query;
  */
 public class Demo {
     public static void main(String[] args) {
-        SessionFactory f = HibernateUtils.getFactory();
-        try(Session s = f.openSession()) {
-            Query q = s.createQuery("From Category");
-            List<Category> cates = q.getResultList();
-            cates.forEach(cate -> System.out.printf("%d - %s\n", cate.getId(), cate.getName()));
-        }
+        ProductService a = new ProductService();
+        BigDecimal startPrice = new BigDecimal(20000000);
+        BigDecimal endPrice = new BigDecimal(30000000);
+        
+        System.out.println(a.productFinding(2));
     }
 }

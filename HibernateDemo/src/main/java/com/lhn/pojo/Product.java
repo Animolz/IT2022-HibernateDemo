@@ -6,13 +6,15 @@
 package com.lhn.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Generated;
 
@@ -21,22 +23,22 @@ import org.hibernate.annotations.Generated;
  * @author Admin
  */
 @Entity
-@Table(name = "category")
-public class Category implements Serializable{
+@Table(name = "product")
+public class Product implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private Set<Product> products;
+    private BigDecimal price;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Override
     public String toString() {
-        return String.format("\n%d - %s\n", this.id, this.name);
-    }
-    
-    
+        return String.format("\n%d - %s - %.0f VND\n", this.id, this.name, this.price);
+    } 
     /**
      * @return the id
      */
@@ -78,4 +80,18 @@ public class Category implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     * @return the price
+     */
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }   
 }
