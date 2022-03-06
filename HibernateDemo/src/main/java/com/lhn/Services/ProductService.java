@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.lhn.main;
+package com.lhn.Services;
 
 import com.lhn.hibernatedemo.HibernateUtils;
 import com.lhn.pojo.Product;
